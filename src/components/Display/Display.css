@@ -1,0 +1,31 @@
+.Display {
+  display: inline-block;
+  border: 2px solid #c9c9c9;
+  border-radius: 4px;
+}
+
+.Display__line {
+  display: flex;
+}
+
+.Display__item {
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  margin: 1px;
+}
+
+.Display__item_active {
+  border: 2px solid #c9c9c9;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.Display__item_active:after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #c9c9c9;
+  border-radius: 4px;
+}

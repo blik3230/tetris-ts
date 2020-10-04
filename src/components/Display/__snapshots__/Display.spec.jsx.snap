@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Display renders active items where items are truly 1`] = `
+<DocumentFragment>
+  <div
+    class="Display"
+  >
+    <div
+      class="Display__line"
+    >
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+    </div>
+    <div
+      class="Display__line"
+    >
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+    </div>
+    <div
+      class="Display__line"
+    >
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+    </div>
+    <div
+      class="Display__line"
+    >
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+    </div>
+    <div
+      class="Display__line"
+    >
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+      <div
+        class="Display__item"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Display renders empty wrapper if received empty array by default 1`] = `
+<DocumentFragment>
+  <div
+    class="Display"
+  />
+</DocumentFragment>
+`;
