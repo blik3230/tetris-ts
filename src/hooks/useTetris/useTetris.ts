@@ -2,11 +2,17 @@ import { Bitmap } from "../../components/Display/Display.types";
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export interface TetrisApi {
-  toLeft(): void;
-  toRight(): void;
+  toLeft?(): void;
+  toRight?(): void;
+  incrementSpeed(): void;
+  decrementSpeed(): void;
+  speed: number;
 }
 
-type UseTetris = (width?: number, height?: number) => [Bitmap | null];
+type UseTetris = (width?: number, height?: number) => [
+  Bitmap | null,
+  TetrisApi,
+];
 
 export enum bitmapColorEnum {
   empty,
@@ -15,10 +21,13 @@ export enum bitmapColorEnum {
 
 export const useTetris: UseTetris = (width = 10, height = 20) => {
   const [curY, setCurY] = useState(0);
-
-  const [curX, setCurX] = useState(Math.ceil(width / 10));
+  const [speed, setSpeed] = useState(1);
+  const [curX, setCurX] = useState(Math.ceil(width / 2));
 
   const [gamePile, setGamePile] = useState(new Array(height).fill(new Array(width).fill(bitmapColorEnum.empty)));
+
+  const incrementSpeed = () => setSpeed(prevSpeed => prevSpeed + 1 > 10? 10 : prevSpeed + 1);
+  const decrementSpeed = () => setSpeed(prevSpeed => prevSpeed - 1 < 1 ? 1 : prevSpeed - 1);
 
   const toRight = () => {
     setCurX(prevCurX => {
@@ -40,7 +49,7 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
   const innerRef = useRef<any>(null);
 
   innerRef.current = {
-    curX, curY,
+    curX, curY, speed,
   };
 
   const toDown = useCallback(() => {
@@ -56,11 +65,13 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
     let timerId: NodeJS.Timeout;
 
     const tick = () => {
+      const speed = innerRef.current.speed;
+      const tickDelay = 500 - (50 * (speed - 1));
       timerId = setTimeout(() => {
         console.log('tick', innerRef.current.curY);
         toDown();
         tick();
-      }, 200);
+      }, tickDelay);
     };
 
     tick();
@@ -76,6 +87,13 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
 
   return [
     bitmap,
+    {
+      speed,
+      incrementSpeed,
+      decrementSpeed,
+      toLeft,
+      toRight,
+    }
   ]
 };
 
