@@ -13,7 +13,6 @@ const Tetris = (props: Props) => {
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
-      console.log(e.code);
       switch (e.code) {
         case 'ArrowLeft':
             console.log('left', tetrisApi);

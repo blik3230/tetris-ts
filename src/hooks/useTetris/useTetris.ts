@@ -17,6 +17,7 @@ type UseTetris = (width?: number, height?: number) => [
 export enum bitmapColorEnum {
   empty,
   grey,
+  red,
 }
 
 export const useTetris: UseTetris = (width = 10, height = 20) => {
@@ -124,6 +125,8 @@ const getBitmap = (gamePile: Bitmap, curShape: bitmapColorEnum[][], curY: number
 
     newGamePile[curY + shapeLineIndex] = newLine;
   }
+
+  newGamePile[curY][curX] = bitmapColorEnum.red;
 
   return newGamePile;
 };
