@@ -2,6 +2,7 @@ import { Bitmap } from "../../components/Display/Display.types";
 import { useCallback, useEffect, useRef, useState } from 'react';
 import shapes, { Shape, ShapeArr } from './shapes';
 import { bitmapColorEnum } from './types';
+import { getBitmap } from './helpers';
 
 export interface TetrisApi {
   toLeft(): void;
@@ -76,7 +77,7 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
 
     const tick = () => {
       const speed = innerRef.current.speed;
-      const tickDelay = 500 - (50 * (speed - 1));
+      const tickDelay = 1000 - (105 * (speed - 1));
       timerId = setTimeout(() => {
         console.log('tick', innerRef.current.curY);
         toDown();
@@ -107,46 +108,5 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
     }
   ]
 };
-
-const getBitmap = (gamePile: Bitmap, curShape: bitmapColorEnum[][], curY: number, curX: number): Bitmap | null => {
-  const newGamePile = [...gamePile];
-
-  for (let shapeLineIndex = 0; shapeLineIndex < curShape.length; shapeLineIndex++) {
-    let resultY = curY + shapeLineIndex;
-
-    if (resultY > gamePile.length - 1) {
-      continue;
-    }
-
-    const newLine = [
-      ...gamePile[resultY]
-    ];
-
-    for (let shapeColumnIndex = 0; shapeColumnIndex < curShape[0].length; shapeColumnIndex++) {
-      const item = newLine[curX + shapeColumnIndex];
-      const shapeItem = curShape[shapeLineIndex][shapeColumnIndex];
-
-      if (shapeItem !== bitmapColorEnum.empty && item !== bitmapColorEnum.empty) {
-        return null;
-      }
-
-      newLine[curX + shapeColumnIndex] = shapeItem;
-    }
-
-    newGamePile[curY + shapeLineIndex] = newLine;
-  }
-
-  //newGamePile[curY][curX] = bitmapColorEnum.red;
-
-  return newGamePile;
-};
-
-/*
-* curY - не является начальной точкой для фигуры, фигура может заступать за его край.
-* вращение фигуры происходит внутри квадрата 4 x 4. curY - является ореентиром и может
-* позиционироваться относительно центра фигурі. Конечная позиция фигуры опредиляется с
-* помощью сентрального ориентира (curX, curY) и лимитов игровова поля
-*
-* */
 
 export default useTetris;
