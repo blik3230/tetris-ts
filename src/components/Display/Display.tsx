@@ -1,7 +1,7 @@
 import React from 'react';
 import './Display.css';
 import { Bitmap } from './Display.types';
-import { bitmapColorEnum } from '../../hooks/useTetris/useTetris';
+import { bitmapColorEnum } from '../../hooks/useTetris/types';
 
 interface Prop {
   bitmap?: Bitmap | null;

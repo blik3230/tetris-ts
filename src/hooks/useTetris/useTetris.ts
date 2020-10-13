@@ -1,34 +1,42 @@
 import { Bitmap } from "../../components/Display/Display.types";
 import { useCallback, useEffect, useRef, useState } from 'react';
+import shapes, { Shape, ShapeArr } from './shapes';
+import { bitmapColorEnum } from './types';
 
 export interface TetrisApi {
-  toLeft?(): void;
-  toRight?(): void;
+  toLeft(): void;
+  toRight(): void;
+  toDown(): void;
   incrementSpeed(): void;
   decrementSpeed(): void;
+  changeRotation(): void;
+
   speed: number;
+  rotation: number;
 }
 
 type UseTetris = (width?: number, height?: number) => [
-  Bitmap | null,
+    Bitmap | null,
   TetrisApi,
 ];
 
-export enum bitmapColorEnum {
-  empty,
-  grey,
-  red,
-}
+const getRandomShapeIndex = () => Math.round(Math.random() * 123) % 7;
 
 export const useTetris: UseTetris = (width = 10, height = 20) => {
   const [curY, setCurY] = useState(0);
   const [speed, setSpeed] = useState(1);
   const [curX, setCurX] = useState(Math.ceil(width / 2));
+  const [curShape, setCurShape] = useState<Shape>(shapes[getRandomShapeIndex()]);
+  const [rotation, setRotation] = useState<number>(0);
 
   const [gamePile, setGamePile] = useState(new Array(height).fill(new Array(width).fill(bitmapColorEnum.empty)));
 
-  const incrementSpeed = () => setSpeed(prevSpeed => prevSpeed + 1 > 10? 10 : prevSpeed + 1);
+  const incrementSpeed = () => setSpeed(prevSpeed => prevSpeed + 1 > 10 ? 10 : prevSpeed + 1);
   const decrementSpeed = () => setSpeed(prevSpeed => prevSpeed - 1 < 1 ? 1 : prevSpeed - 1);
+
+  const changeRotation = () => {
+    setRotation(prevRotation => prevRotation + 1 <= 3 ? prevRotation + 1 : 0);
+  };
 
   const toRight = () => {
     setCurX(prevCurX => {
@@ -45,6 +53,7 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
   const nextShapeStart = useCallback(() => {
     setCurX(Math.ceil(width / 2));
     setCurY(0);
+    setCurShape(shapes[getRandomShapeIndex()])
   }, [width]);
 
   const innerRef = useRef<any>(null);
@@ -54,7 +63,7 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
   };
 
   const toDown = useCallback(() => {
-    if(innerRef.current.curY + 1 >= height) {
+    if (innerRef.current.curY + 1 >= height) {
       nextShapeStart();
       return;
     }
@@ -79,21 +88,22 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
 
     return () => clearTimeout(timerId);
   }, [toDown]);
-  const shapeShoe: Bitmap = [
-    [bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey],
-  ];
-  const bitmap = getBitmap(gamePile, shapeShoe, curY, curX);
+
+  const shapeArr: ShapeArr = curShape[rotation] || (rotation === 3 && curShape[1]) || curShape[0];
+
+  const bitmap = getBitmap(gamePile, shapeArr, curY, curX);
 
   return [
     bitmap,
     {
       speed,
+      rotation,
       incrementSpeed,
       decrementSpeed,
       toLeft,
       toRight,
+      toDown,
+      changeRotation,
     }
   ]
 };
@@ -101,10 +111,10 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
 const getBitmap = (gamePile: Bitmap, curShape: bitmapColorEnum[][], curY: number, curX: number): Bitmap | null => {
   const newGamePile = [...gamePile];
 
-  for(let shapeLineIndex = 0; shapeLineIndex < curShape.length; shapeLineIndex++ ) {
+  for (let shapeLineIndex = 0; shapeLineIndex < curShape.length; shapeLineIndex++) {
     let resultY = curY + shapeLineIndex;
 
-    if(resultY > gamePile.length - 1) {
+    if (resultY > gamePile.length - 1) {
       continue;
     }
 
@@ -112,11 +122,11 @@ const getBitmap = (gamePile: Bitmap, curShape: bitmapColorEnum[][], curY: number
       ...gamePile[resultY]
     ];
 
-    for(let shapeColumnIndex = 0; shapeColumnIndex < curShape[0].length; shapeColumnIndex++) {
+    for (let shapeColumnIndex = 0; shapeColumnIndex < curShape[0].length; shapeColumnIndex++) {
       const item = newLine[curX + shapeColumnIndex];
       const shapeItem = curShape[shapeLineIndex][shapeColumnIndex];
 
-      if(shapeItem !== bitmapColorEnum.empty && item !== bitmapColorEnum.empty) {
+      if (shapeItem !== bitmapColorEnum.empty && item !== bitmapColorEnum.empty) {
         return null;
       }
 
@@ -126,7 +136,7 @@ const getBitmap = (gamePile: Bitmap, curShape: bitmapColorEnum[][], curY: number
     newGamePile[curY + shapeLineIndex] = newLine;
   }
 
-  newGamePile[curY][curX] = bitmapColorEnum.red;
+  //newGamePile[curY][curX] = bitmapColorEnum.red;
 
   return newGamePile;
 };

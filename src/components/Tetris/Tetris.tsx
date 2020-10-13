@@ -13,28 +13,31 @@ const Tetris = (props: Props) => {
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
+      console.log(e.code);
       switch (e.code) {
         case 'ArrowLeft':
-            console.log('left', tetrisApi);
-          if(tetrisApi && tetrisApi.toLeft) {
-            tetrisApi.toLeft();
-          }
+          tetrisApi.toLeft();
           break;
         case 'ArrowRight':
-            console.log('right')
-          if(tetrisApi && tetrisApi.toRight) {
-            tetrisApi.toRight();
-          }
+          tetrisApi.toRight();
+          break;
+        case 'ArrowDown':
+          tetrisApi.toDown();
+          break;
+        case 'Space':
+          tetrisApi.changeRotation();
+          break;
       }
     });
   }, []);
 
   return (
     <div className="Tetris">
-      <button onClick={tetrisApi.incrementSpeed}>+</button>
-      <span>{tetrisApi.speed}</span>
-      <button onClick={tetrisApi.decrementSpeed}>-</button>
+      <button onClick={ tetrisApi.incrementSpeed }>+</button>
+      <span>{ tetrisApi.speed }</span>
+      <button onClick={ tetrisApi.decrementSpeed }>-</button>
 
+      <div>Rotation: { tetrisApi.rotation }</div>
       <div className="Tetris__wrapDisplay">
         <Display bitmap={ bitmap }/>
       </div>
