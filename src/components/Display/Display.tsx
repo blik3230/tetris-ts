@@ -1,17 +1,20 @@
 import React from 'react';
 import './Display.css';
+import { Bitmap } from './Display.types';
 
 interface Prop {
-  screenData?: Array<boolean[]>;
+  bitmap?: Bitmap | null;
 }
 
 const Display = (props: Prop) => {
-  const { screenData = [] } = props;
+  const { bitmap } = props;
+
+  if(!bitmap) return null;
 
   return (
     <div className="Display">
       {
-        screenData.map((lineItems, lineIndex) => {
+        bitmap.map((lineItems, lineIndex) => {
 
           return (
             <div className="Display__line" key={lineIndex}>
