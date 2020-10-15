@@ -1,152 +1,48 @@
-import { bitmapColorEnum } from './types';
-
-export type ShapeArr = [
-  [bitmapColorEnum, bitmapColorEnum, bitmapColorEnum, bitmapColorEnum],
-  [bitmapColorEnum, bitmapColorEnum, bitmapColorEnum, bitmapColorEnum],
-  [bitmapColorEnum, bitmapColorEnum, bitmapColorEnum, bitmapColorEnum],
-  [bitmapColorEnum, bitmapColorEnum, bitmapColorEnum, bitmapColorEnum],
-];
-
-export type Shape = ShapeArr[];
+import { bitmapItemEnum } from './types';
+import { Bitmap } from '../../components/Display/Display.types';
 
 
-export const shapeO: Shape = [
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty]
-  ]
+export const shapeO: Bitmap = [
+  [bitmapItemEnum.grey, bitmapItemEnum.grey],
+  [bitmapItemEnum.grey, bitmapItemEnum.grey],
 ];
 
 
-export const shapeI: Shape = [
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.grey],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty]
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty]
-  ],
+export const shapeI: Bitmap = [
+  [bitmapItemEnum.grey],
+  [bitmapItemEnum.grey],
+  [bitmapItemEnum.grey],
+  [bitmapItemEnum.grey],
 ];
 
-export const shapeJ: Shape = [
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ]
+export const shapeJ: Bitmap = [
+    [bitmapItemEnum.empty, bitmapItemEnum.grey],
+    [bitmapItemEnum.empty, bitmapItemEnum.grey],
+    [bitmapItemEnum.grey, bitmapItemEnum.grey],
 ];
 
-export const shapeL: Shape = [
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.grey],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.grey],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ]
+export const shapeL: Bitmap = [
+  [bitmapItemEnum.grey, bitmapItemEnum.empty],
+  [bitmapItemEnum.grey, bitmapItemEnum.empty],
+  [bitmapItemEnum.grey, bitmapItemEnum.grey],
 ];
 
-export const shapeZ: Shape = [
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
+export const shapeZ: Bitmap = [
+  [bitmapItemEnum.grey, bitmapItemEnum.grey, bitmapItemEnum.empty],
+  [bitmapItemEnum.empty, bitmapItemEnum.grey, bitmapItemEnum.grey],
 ];
 
-export const shapeS: Shape = [
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty],
-  ]
+export const shapeS: Bitmap = [
+  [bitmapItemEnum.empty, bitmapItemEnum.grey, bitmapItemEnum.grey],
+  [bitmapItemEnum.grey, bitmapItemEnum.grey, bitmapItemEnum.empty],
 ];
 
-export const shapeT: Shape = [
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-  ],
-  [
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.grey, bitmapColorEnum.empty],
-    [bitmapColorEnum.empty, bitmapColorEnum.empty, bitmapColorEnum.grey, bitmapColorEnum.empty],
-  ]
+export const shapeT: Bitmap = [
+  [bitmapItemEnum.empty, bitmapItemEnum.grey, bitmapItemEnum.empty, bitmapItemEnum.empty],
+  [bitmapItemEnum.grey, bitmapItemEnum.grey, bitmapItemEnum.grey, bitmapItemEnum.empty],
 ];
 
-const shapes: Shape[] = [shapeO, shapeJ, shapeL, shapeI, shapeZ, shapeS, shapeT];
+const shapes: Bitmap[] = [shapeO, shapeJ, shapeL, shapeI, shapeZ, shapeS, shapeT];
 
 export default shapes;
 

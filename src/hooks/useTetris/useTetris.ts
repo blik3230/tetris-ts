@@ -1,13 +1,14 @@
 import { Bitmap } from "../../components/Display/Display.types";
 import { useCallback, useEffect, useRef, useState } from 'react';
-import shapes, { Shape, ShapeArr } from './shapes';
-import { bitmapColorEnum } from './types';
-import { getBitmap } from './helpers';
+import shapes from './shapes';
+import { bitmapItemEnum } from './types';
+import { getBitmap, rotateBitmap } from './helpers';
 
 export interface TetrisApi {
   toLeft(): void;
   toRight(): void;
   toDown(): void;
+  toUp(): void;
   incrementSpeed(): void;
   decrementSpeed(): void;
   changeRotation(): void;
@@ -23,20 +24,20 @@ type UseTetris = (width?: number, height?: number) => [
 
 const getRandomShapeIndex = () => Math.round(Math.random() * 123) % 7;
 
-export const useTetris: UseTetris = (width = 10, height = 20) => {
+export const useTetris: UseTetris = (width = 11, height = 20) => {
   const [curY, setCurY] = useState(0);
   const [speed, setSpeed] = useState(1);
-  const [curX, setCurX] = useState(Math.ceil(width / 2));
-  const [curShape, setCurShape] = useState<Shape>(shapes[getRandomShapeIndex()]);
+  const [curX, setCurX] = useState(Math.floor(width / 2));
+  const [curShape, setCurShape] = useState<Bitmap>(shapes[getRandomShapeIndex()]);
   const [rotation, setRotation] = useState<number>(0);
 
-  const [gamePile, setGamePile] = useState(new Array(height).fill(new Array(width).fill(bitmapColorEnum.empty)));
+  const [gamePile, setGamePile] = useState<Bitmap>(new Array(height).fill(new Array(width).fill(bitmapItemEnum.empty)));
 
   const incrementSpeed = () => setSpeed(prevSpeed => prevSpeed + 1 > 10 ? 10 : prevSpeed + 1);
   const decrementSpeed = () => setSpeed(prevSpeed => prevSpeed - 1 < 1 ? 1 : prevSpeed - 1);
 
   const changeRotation = () => {
-    setRotation(prevRotation => prevRotation + 1 <= 3 ? prevRotation + 1 : 0);
+    setCurShape(prevShape => rotateBitmap(prevShape));
   };
 
   const toRight = () => {
@@ -52,7 +53,7 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
   };
 
   const nextShapeStart = useCallback(() => {
-    setCurX(Math.ceil(width / 2));
+    setCurX(Math.floor(width / 2));
     setCurY(0);
     setCurShape(shapes[getRandomShapeIndex()])
   }, [width]);
@@ -72,6 +73,10 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
     setCurY(innerRef.current.curY + 1);
   }, [height, nextShapeStart]);
 
+  const toUp = useCallback(() => {
+    setCurY(innerRef.current.curY - 1 < 0 ? 0: innerRef.current.curY - 1);
+  }, [height, nextShapeStart]);
+
   useEffect(() => {
     let timerId: NodeJS.Timeout;
 
@@ -85,14 +90,12 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
       }, tickDelay);
     };
 
-    tick();
+    // tick();
 
     return () => clearTimeout(timerId);
   }, [toDown]);
 
-  const shapeArr: ShapeArr = curShape[rotation] || (rotation === 3 && curShape[1]) || curShape[0];
-
-  const bitmap = getBitmap(gamePile, shapeArr, curY, curX);
+  const bitmap = getBitmap(gamePile, curShape, curY, curX);
 
   return [
     bitmap,
@@ -105,6 +108,7 @@ export const useTetris: UseTetris = (width = 10, height = 20) => {
       toRight,
       toDown,
       changeRotation,
+      toUp,
     }
   ]
 };

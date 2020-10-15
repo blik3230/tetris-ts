@@ -1,3 +1,3 @@
-import { bitmapColorEnum } from '../../hooks/useTetris/types';
+import { bitmapItemEnum } from '../../hooks/useTetris/types';
 
-export type Bitmap = bitmapColorEnum[][];
+export type Bitmap = bitmapItemEnum[][];

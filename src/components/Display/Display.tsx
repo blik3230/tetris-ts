@@ -1,16 +1,16 @@
 import React from 'react';
 import './Display.css';
 import { Bitmap } from './Display.types';
-import { bitmapColorEnum } from '../../hooks/useTetris/types';
+import { bitmapItemEnum } from '../../hooks/useTetris/types';
 
 interface Prop {
   bitmap?: Bitmap | null;
 }
 
 const mapBitmapColorClasses = {
-  [bitmapColorEnum.empty]: '',
-  [bitmapColorEnum.grey]: 'Display__item_grey',
-  [bitmapColorEnum.red]: 'Display__item_red',
+  [bitmapItemEnum.empty]: '',
+  [bitmapItemEnum.grey]: 'Display__item_grey',
+  [bitmapItemEnum.red]: 'Display__item_red',
 }
 
 const Display = (props: Prop) => {

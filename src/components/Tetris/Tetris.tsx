@@ -24,6 +24,9 @@ const Tetris = (props: Props) => {
         case 'ArrowDown':
           tetrisApi.toDown();
           break;
+        case 'ArrowUp':
+          tetrisApi.toUp();
+          break;
         case 'Space':
           tetrisApi.changeRotation();
           break;
