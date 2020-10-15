@@ -8,7 +8,7 @@ interface Prop {
 }
 
 const mapBitmapColorClasses = {
-  [bitmapItemEnum.empty]: '',
+  [bitmapItemEnum.empty]: 'Display__item_empty',
   [bitmapItemEnum.grey]: 'Display__item_grey',
   [bitmapItemEnum.red]: 'Display__item_red',
 }

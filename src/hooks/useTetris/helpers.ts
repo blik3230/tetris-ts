@@ -64,9 +64,8 @@ export const wrapShapeInSquare = (shape: Bitmap): Bitmap => {
 
 export const getBitmap = (gamePile: Bitmap, curShape: bitmapItemEnum[][], curY: number, curX: number): Bitmap | null => {
   const newGamePile = [...gamePile];
-  const alignedShape = wrapShapeInSquare(curShape);
 
-  for (let shapeLineRevertIndex = alignedShape.length - 1, i = 0; shapeLineRevertIndex >= 0; shapeLineRevertIndex--, i++) {
+  for (let shapeLineRevertIndex = curShape.length - 1, i = 0; shapeLineRevertIndex >= 0; shapeLineRevertIndex--, i++) {
     let newGamePileLineIndex = curY - i;
 
     if (newGamePileLineIndex > gamePile.length - 1 || newGamePileLineIndex < 0) {
@@ -78,9 +77,9 @@ export const getBitmap = (gamePile: Bitmap, curShape: bitmapItemEnum[][], curY: 
       ...gamePile[newGamePileLineIndex]
     ];
 
-    for (let shapeColumnIndex = 0; shapeColumnIndex < alignedShape[0].length; shapeColumnIndex++) {
+    for (let shapeColumnIndex = 0; shapeColumnIndex < curShape[0].length; shapeColumnIndex++) {
       const item = newLine[curX + shapeColumnIndex];
-      const shapeItem = alignedShape[shapeLineRevertIndex][shapeColumnIndex];
+      const shapeItem = curShape[shapeLineRevertIndex][shapeColumnIndex];
 
       if (shapeItem !== bitmapItemEnum.empty && item !== bitmapItemEnum.empty) {
         return null;
